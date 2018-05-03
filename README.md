@@ -42,8 +42,8 @@ Loss function for the training is basically just a binary crossentropy
 
 This tutorial depends on the following libraries:
 
-* Tensorflow
-* Keras >= 1.0
+* Tensorflow 1.0
+* Keras >= 2.0
 * libtiff(optional)
 
 Also, this code should be compatible with Python versions 2.7-3.5.
