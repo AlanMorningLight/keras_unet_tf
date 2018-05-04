@@ -123,7 +123,7 @@ class myUnet(object):
 		drop5 = Dropout(0.5)(conv5)
 
 		up6 = Conv2D(512, 2, activation = 'relu', padding = 'same', kernel_initializer = 'he_normal')(UpSampling2D(size = (2,2))(drop5))
-		merge6 = Concatenate([drop4, up6])
+		merge6 = concatenate([drop4, up6])
 		"""
 		1) How are result and merged connected? Assuming you mean how are they concatenated.
 
@@ -140,17 +140,17 @@ class myUnet(object):
 		conv6 = Conv2D(512, 3, activation = 'relu', padding = 'same', kernel_initializer = 'he_normal')(conv6)
 
 		up7 = Conv2D(256, 2, activation = 'relu', padding = 'same', kernel_initializer = 'he_normal')(UpSampling2D(size = (2,2))(conv6))
-		merge7 = Concatenate([conv3, up7])
+		merge7 = concatenate([conv3, up7])
 		conv7 = Conv2D(256, 3, activation = 'relu', padding = 'same', kernel_initializer = 'he_normal')(merge7)
 		conv7 = Conv2D(256, 3, activation = 'relu', padding = 'same', kernel_initializer = 'he_normal')(conv7)
 
 		up8 = Conv2D(128, 2, activation = 'relu', padding = 'same', kernel_initializer = 'he_normal')(UpSampling2D(size = (2,2))(conv7))
-		merge8 = Concatenate([conv2, up8])
+		merge8 = concatenate([conv2, up8])
 		conv8 = Conv2D(128, 3, activation = 'relu', padding = 'same', kernel_initializer = 'he_normal')(merge8)
 		conv8 = Conv2D(128, 3, activation = 'relu', padding = 'same', kernel_initializer = 'he_normal')(conv8)
 
 		up9 = Conv2D(64, 2, activation = 'relu', padding = 'same', kernel_initializer = 'he_normal')(UpSampling2D(size = (2,2))(conv8))
-		merge9 = Concatenate([conv1, up9])
+		merge9 = concatenate([conv1, up9])
 		conv9 = Conv2D(64, 3, activation = 'relu', padding = 'same', kernel_initializer = 'he_normal')(merge9)
 		conv9 = Conv2D(64, 3, activation = 'relu', padding = 'same', kernel_initializer = 'he_normal')(conv9)
 		conv9 = Conv2D(2, 3, activation = 'relu', padding = 'same', kernel_initializer = 'he_normal')(conv9)
@@ -177,7 +177,7 @@ class myUnet(object):
 
 		print('predict test data')
 		imgs_mask_test = model.predict(imgs_test, batch_size=1, verbose=1)
-		np.save('../results/imgs_mask_test.npy', imgs_mask_test)
+		np.save('./results/imgs_mask_test.npy', imgs_mask_test)
 
 	def save_img(self):
 
@@ -186,7 +186,7 @@ class myUnet(object):
 		for i in range(imgs.shape[0]):
 			img = imgs[i]
 			img = array_to_img(img)
-			img.save("../results/%d.jpg"%(i))
+			img.save("./results/%d.jpg"%(i))
 
 
 
