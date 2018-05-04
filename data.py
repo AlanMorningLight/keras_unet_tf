@@ -14,13 +14,7 @@ cv2和TIFF需要安装opencv和libtiff
 
 # class myAugmentation(object):
 	
-	"""
-	A class used to augmentate image
-	Firstly, read train image and label seperately, and then merge them together for the next process
-	Secondly, use keras preprocessing to augmentate image
-	Finally, seperate augmentated image apart into train image and label
 
-	"""
 
 	# def __init__(self, train_path="train", label_path="label", merge_path="merge", aug_merge_path="aug_merge", aug_train_path="aug_train", aug_label_path="aug_label", img_type="tif"):
 		
@@ -143,7 +137,7 @@ cv2和TIFF需要安装opencv和libtiff
 
 class dataProcess(object):
 
-	def __init__(self, out_rows, out_cols, data_path = "../deform/train", label_path = "../deform/label", test_path = "../test", npy_path = "../npydata", img_type = "tif"):
+	def __init__(self, out_rows, out_cols, data_path = "./data/train/image", label_path = "./data/train/label", test_path = "./data/test", npy_path = "./npydata", img_type = "tif"):
 
 		"""
 		

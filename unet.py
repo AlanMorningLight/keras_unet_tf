@@ -1,8 +1,9 @@
+
 import os 
 #os.environ["CUDA_VISIBLE_DEVICES"] = "0"
 import numpy as np
 from keras.models import *
-from keras.layers import Input, Merge, Conv2D, MaxPooling2D, UpSampling2D, Dropout, Cropping2D,Con
+from keras.layers import Input, Merge, Conv2D, MaxPooling2D, UpSampling2D, Dropout, Cropping2D,concatenate
 from keras.optimizers import *
 from keras.callbacks import ModelCheckpoint, LearningRateScheduler
 from keras import backend as keras
@@ -122,7 +123,7 @@ class myUnet(object):
 		drop5 = Dropout(0.5)(conv5)
 
 		up6 = Conv2D(512, 2, activation = 'relu', padding = 'same', kernel_initializer = 'he_normal')(UpSampling2D(size = (2,2))(drop5))
-		merge6 = Concatenate([drop4, up6],axis=3)
+		merge6 = Concatenate([drop4, up6])
 		"""
 		1) How are result and merged connected? Assuming you mean how are they concatenated.
 
@@ -139,17 +140,17 @@ class myUnet(object):
 		conv6 = Conv2D(512, 3, activation = 'relu', padding = 'same', kernel_initializer = 'he_normal')(conv6)
 
 		up7 = Conv2D(256, 2, activation = 'relu', padding = 'same', kernel_initializer = 'he_normal')(UpSampling2D(size = (2,2))(conv6))
-		merge7 = Concatenate([conv3, up7],axis=3)
+		merge7 = Concatenate([conv3, up7])
 		conv7 = Conv2D(256, 3, activation = 'relu', padding = 'same', kernel_initializer = 'he_normal')(merge7)
 		conv7 = Conv2D(256, 3, activation = 'relu', padding = 'same', kernel_initializer = 'he_normal')(conv7)
 
 		up8 = Conv2D(128, 2, activation = 'relu', padding = 'same', kernel_initializer = 'he_normal')(UpSampling2D(size = (2,2))(conv7))
-		merge8 = Concatenate([conv2, up8],axis=3)
+		merge8 = Concatenate([conv2, up8])
 		conv8 = Conv2D(128, 3, activation = 'relu', padding = 'same', kernel_initializer = 'he_normal')(merge8)
 		conv8 = Conv2D(128, 3, activation = 'relu', padding = 'same', kernel_initializer = 'he_normal')(conv8)
 
 		up9 = Conv2D(64, 2, activation = 'relu', padding = 'same', kernel_initializer = 'he_normal')(UpSampling2D(size = (2,2))(conv8))
-		merge9 = Concatenate([conv1, up9],axis=3)
+		merge9 = Concatenate([conv1, up9])
 		conv9 = Conv2D(64, 3, activation = 'relu', padding = 'same', kernel_initializer = 'he_normal')(merge9)
 		conv9 = Conv2D(64, 3, activation = 'relu', padding = 'same', kernel_initializer = 'he_normal')(conv9)
 		conv9 = Conv2D(2, 3, activation = 'relu', padding = 'same', kernel_initializer = 'he_normal')(conv9)
